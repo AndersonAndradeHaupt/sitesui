@@ -46,29 +46,34 @@
 <div class="container">
     <h1>Calculadora de Horário</h1>
     <p>Sui, que horas você saiu hoje?</p>
-    <input type="text" id="horaSaida" placeholder="Digite no formato 24 horas" required>
+    <label for="horas">Horas:</label>
+    <input type="number" id="horas" placeholder="Horas" min="0" max="23" required>
+    <label for="minutos">Minutos:</label>
+    <input type="number" id="minutos" placeholder="Minutos" min="0" max="59" required>
     <button onclick="calcularHorario()">Calcular</button>
     <p id="resultado"></p>
     <script>
         function calcularHorario() {
-            var horaSaida = document.getElementById('horaSaida').value;
+            var horas = parseInt(document.getElementById('horas').value);
+            var minutos = parseInt(document.getElementById('minutos').value);
 
-            // Verifica se o formato da hora está correto
-            var regexHora = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
-            if (!regexHora.test(horaSaida)) {
-                document.getElementById('resultado').innerText = 'Por favor, digite a hora no formato 24 horas válido.';
+            // Verifica se os valores de horas e minutos são válidos
+            if (isNaN(horas) || isNaN(minutos) || horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
+                document.getElementById('resultado').innerText = 'Por favor, insira valores válidos para horas e minutos.';
                 return;
             }
 
-            // Transforma a string da hora de saída em um objeto Date
-            var dataSaida = new Date('2000-01-01T' + horaSaida + ':00');
+            // Transforma os valores de horas e minutos em um objeto Date
+            var dataSaida = new Date();
+            dataSaida.setHours(horas);
+            dataSaida.setMinutes(minutos);
 
             // Adiciona 1 hora e 10 minutos
             dataSaida.setHours(dataSaida.getHours() + 1);
             dataSaida.setMinutes(dataSaida.getMinutes() + 10);
 
-            // Formata a hora de volta para 24 horas
-            var horaVolta = dataSaida.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
+            // Formata a hora de volta para 12 horas
+            var horaVolta = dataSaida.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit', hour12: true});
 
             // Exibe a mensagem
             document.getElementById('resultado').innerText = 'Sui, você volta para o trabalho às: ' + horaVolta;
