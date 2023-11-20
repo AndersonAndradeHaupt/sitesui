@@ -72,8 +72,8 @@
             dataSaida.setHours(dataSaida.getHours() + 1);
             dataSaida.setMinutes(dataSaida.getMinutes() + 10);
 
-            // Formata a hora de volta para 12 horas
-            var horaVolta = dataSaida.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit', hour12: true});
+            // Formata a hora de volta para 24 horas
+            var horaVolta = dataSaida.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
 
             // Exibe a mensagem
             document.getElementById('resultado').innerText = 'Sui, você volta para o trabalho às: ' + horaVolta;
