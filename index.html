@@ -79,25 +79,25 @@
             var horas = parseInt(document.getElementById('horas').value);
             var minutos = parseInt(document.getElementById('minutos').value);
 
-            // Verifica se os valores de horas e minutos são válidos
+
             if (isNaN(horas) || isNaN(minutos) || horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
                 document.getElementById('resultado').innerText = 'Por favor, insira valores válidos para horas e minutos.';
                 return;
             }
 
-            // Transforma os valores de horas e minutos em um objeto Date
+
             var dataSaida = new Date();
             dataSaida.setHours(horas);
             dataSaida.setMinutes(minutos);
 
-            // Adiciona 1 hora e 10 minutos
+
             dataSaida.setHours(dataSaida.getHours() + 1);
             dataSaida.setMinutes(dataSaida.getMinutes() + 10);
 
-            // Formata a hora de volta para 24 horas
+
             var horaVolta = dataSaida.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
 
-            // Exibe a mensagem
+
             document.getElementById('resultado').innerText = 'Sui, você volta para o trabalho às: ' + horaVolta;
         }
     </script>
